@@ -1,38 +1,20 @@
 <script setup lang="ts">
-import Papa from 'papaparse';
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import Loader from '@/components/Loader.vue';
 
-type TableData = {
-  id: string;
-  nombre_cuadro: string;
-  nombre_artista: string;
-  ano_creacion: number;
-  pais_creacion: string;
-  lace_imagen: string;
-  texto: string;
-  lace_grabacion: string;
-}[];
-
-const tableData = ref<TableData>([]);
+import useArtStore from '@/stores/artStore';
+import type ArtPiece from '@/types/art';
 
 const galleryLoaded = ref(false)
+var artPieces: ArtPiece[] = []
 
-Papa.parse(import.meta.env.VITE_SRC_SPREADSHEET, {
-  download: true,
-  header: true,
-  complete: (results) => {
-    setTimeout(() => {
-      tableData.value = (results.data as TableData).filter((item) => item.id !== "" && item.lace_imagen !== "");
-      galleryLoaded.value = true;
-      console.log(tableData.value);
-    }, 2500);
-  },
-  error: (error) => {
-    console.error('error', error);
-  },
+useArtStore().fetchArtPieces().then((artStore) => {
+  setTimeout(() => {
+    artPieces = artStore!.artPieces
+    galleryLoaded.value = true;
+  }, 1500);
 });
 
 </script>
@@ -44,7 +26,7 @@ Papa.parse(import.meta.env.VITE_SRC_SPREADSHEET, {
       <h2>La Merci Littoral</h2>
     </div>
     <div id="gallery" :class="{ 'hidden': !galleryLoaded }">
-      <RouterLink :to="{name: 'details', params: {id: item.id}}" v-for="(item, index) in tableData">
+      <RouterLink :to="{name: 'details', params: {id: item.id}}" v-for="(item, index) in artPieces">
         <img :src="item.lace_imagen" :alt="item.nombre_cuadro" />
       </RouterLink>
     </div>
@@ -69,7 +51,7 @@ Papa.parse(import.meta.env.VITE_SRC_SPREADSHEET, {
 }
 
 #landing-wrapper.restrictHeight {
-  height: 100vh;
+  height: 100svh;
 }
 
 #title-section {
