@@ -43,26 +43,31 @@ onMounted(async () => {
       <div id="artInfo">
         <h2>Informaciones sobre la obra</h2>
         <div id="artInfoGrid">
-          <div class="artInfoSection">
-            <Presentation />
-            <p><span class="pieceOfInfoTitle">Nombre</span> : {{ artPiece.nombre_cuadro }}</p>
-          </div>
-          <div class="artInfoSection">
-            <UserPen />
-            <p><span class="pieceOfInfoTitle">Artista</span> : {{ artPiece.nombre_artista }}</p>
-          </div>
-          <div class="artInfoSection">
-            <Calendar />
-            <p><span class="pieceOfInfoTitle">Año de creación</span> : {{ artPiece.ano_creacion }}</p>
-          </div>
-          <div class="artInfoSection">
-            <Earth />
-            <p><span class="pieceOfInfoTitle">País de creación</span> : {{ artPiece.pais_creacion }}</p>
-          </div>
-          <div class="artInfoSection">
-            <Brush />
-            <p><span class="pieceOfInfoTitle">Movimiento</span> : {{ artPiece.movimiento }}</p>
-          </div>
+            <div class="artInfoSection">
+              <Presentation />
+              <span class="pieceOfInfoTitle">Nombre</span>
+              <span class="pieceOfInfoData">{{ artPiece.nombre_cuadro }}</span>
+            </div>
+            <div class="artInfoSection">
+              <UserPen />
+              <span class="pieceOfInfoTitle">Artista</span>
+              <span class="pieceOfInfoData">{{ artPiece.nombre_artista }}</span>
+            </div>
+            <div class="artInfoSection">
+              <Calendar />
+              <span class="pieceOfInfoTitle">Año de creación</span>
+              <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
+            </div>
+            <div class="artInfoSection">
+              <Earth />
+              <span class="pieceOfInfoTitle">País de creación</span>
+              <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
+            </div>
+            <div class="artInfoSection">
+              <Brush />
+              <span class="pieceOfInfoTitle">Movimiento</span>
+              <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
+            </div>
           <div class="artInfoSection">
           </div>
         </div>
@@ -131,42 +136,70 @@ onMounted(async () => {
 }
 
 #artPresentation {
-  width: 70%;
+  width: 80%;
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 70ch 2px auto;
-  gap: 7%;
+  grid-template-columns: minmax(0, 2fr) 2px 1fr;
+  gap: 4%;
 }
 
 #artText {
-  width: 70ch;
+  max-width: 70ch;
   box-sizing: content-box;
 }
 
-#artText h2 {
+#artText h2, #artInfo h2 {
   margin-top: 0;
 }
 
 #verticalRule {
   width: 2px;
   background-color: rgb(104, 104, 104);
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
-#artInfoFlex {
+#artInfoGrid {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 40px;
 }
 
 .artInfoSection {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
   align-items: center;
-  gap: 20px;
+  column-gap: 20px;
+}
+
+.artInfoSection svg {
+  grid-row: span 2;
 }
 
 .pieceOfInfoTitle {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 970px) {
+  #artPresentation {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 2px auto;
+  }
+
+  #verticalRule {
+    width: 100%;
+    height: 2px;
+  }
+
+  #artInfoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-right: 40px;
+  }
+
+}
+
+
 
 #loader-wrapper {
   display: flex;
