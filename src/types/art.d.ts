@@ -8,6 +8,7 @@ type ArtPiece = {
     lace_imagen: string;
     texto: string;
     lace_grabacion: string;
+    estudiante: string;
 };
 
 export default ArtPiece;

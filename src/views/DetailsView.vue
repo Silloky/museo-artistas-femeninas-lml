@@ -34,45 +34,53 @@ onMounted(async () => {
         <img :src="artPiece?.lace_imagen" :alt="artPiece?.nombre_cuadro" />
       </a>
     </div>
+    <div class="detailsSeparator"></div>
     <div id="artPresentation">
       <div id="artText">
         <h2>Texto de presentación</h2>
         <MarkdownRenderer :source="artPiece?.texto" :demote="2" />
       </div>
-      <div id="verticalRule"></div>
+      <div id="presentationSeparator"></div>
       <div id="artInfo">
         <h2>Informaciones sobre la obra</h2>
         <div id="artInfoGrid">
-            <div class="artInfoSection">
-              <Presentation />
-              <span class="pieceOfInfoTitle">Nombre</span>
-              <span class="pieceOfInfoData">{{ artPiece.nombre_cuadro }}</span>
-            </div>
-            <div class="artInfoSection">
-              <UserPen />
-              <span class="pieceOfInfoTitle">Artista</span>
-              <span class="pieceOfInfoData">{{ artPiece.nombre_artista }}</span>
-            </div>
-            <div class="artInfoSection">
-              <Calendar />
-              <span class="pieceOfInfoTitle">Año de creación</span>
-              <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
-            </div>
-            <div class="artInfoSection">
-              <Earth />
-              <span class="pieceOfInfoTitle">País de creación</span>
-              <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
-            </div>
-            <div class="artInfoSection">
-              <Brush />
-              <span class="pieceOfInfoTitle">Movimiento</span>
-              <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
-            </div>
+          <div class="artInfoSection">
+            <Presentation />
+            <span class="pieceOfInfoTitle">Nombre</span>
+            <span class="pieceOfInfoData">{{ artPiece.nombre_cuadro }}</span>
+          </div>
+          <div class="artInfoSection">
+            <UserPen />
+            <span class="pieceOfInfoTitle">Artista</span>
+            <span class="pieceOfInfoData">{{ artPiece.nombre_artista }}</span>
+          </div>
+          <div class="artInfoSection">
+            <Calendar />
+            <span class="pieceOfInfoTitle">Año de creación</span>
+            <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
+          </div>
+          <div class="artInfoSection">
+            <Earth />
+            <span class="pieceOfInfoTitle">País de creación</span>
+            <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
+          </div>
+          <div class="artInfoSection">
+            <Brush />
+            <span class="pieceOfInfoTitle">Movimiento</span>
+            <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
+          </div>
+          <div class="artInfoSection">
+            <GraduationCap />
+            <span class="pieceOfInfoTitle">Estudiante</span>
+            <span class="pieceOfInfoData">{{ artPiece.estudiante }}</span>
+          </div>
           <div class="artInfoSection">
           </div>
         </div>
       </div>
     </div>
+    <div class="detailsSeparator"></div>
+    <iframe id="artAudio" src="https://drive.google.com/file/d/1WQaI4no5SUV2BXUHARfppoZ7gTWpgsBV/preview"></iframe>
   </div>
   <div id="loader-wrapper" v-if="!artPiece">
     <Loader />
@@ -89,6 +97,7 @@ onMounted(async () => {
   padding: 5vh;
   box-sizing: border-box;
   gap: 5vh;
+  overflow: hidden;
 }
 
 #artHeadline {
@@ -135,6 +144,12 @@ onMounted(async () => {
   height: 100%;
 }
 
+.detailsSeparator {
+  width: 100%;
+  height: 2px;
+  background-color: rgb(104, 104, 104);
+}
+
 #artPresentation {
   width: 80%;
   overflow: hidden;
@@ -152,7 +167,7 @@ onMounted(async () => {
   margin-top: 0;
 }
 
-#verticalRule {
+#presentationSeparator {
   width: 2px;
   background-color: rgb(104, 104, 104);
   /* margin: 20px 0; */
@@ -180,13 +195,20 @@ onMounted(async () => {
   text-decoration: underline;
 }
 
+#artAudio {
+  width: 200%;
+  height: 100px;
+  margin-top: 20px;
+  border: none;
+}
+
 @media screen and (max-width: 970px) {
   #artPresentation {
     grid-template-columns: 1fr;
     grid-template-rows: auto 2px auto;
   }
 
-  #verticalRule {
+  #presentationSeparator {
     width: 100%;
     height: 2px;
   }
