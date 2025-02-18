@@ -16,5 +16,10 @@ main {
   background-color: #1e1e1f;
   scrollbar-gutter: stable;
   overflow-x: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-bottom: 5vh;
 }
 </style>

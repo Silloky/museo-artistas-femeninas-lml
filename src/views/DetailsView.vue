@@ -2,6 +2,7 @@
 import router from '@/router';
 import useArtStore from '@/stores/artStore';
 import Loader from '@/components/Loader.vue';
+import BottomMention from '@/components/BottomMention.vue';
 import MarkdownRenderer from '@/components/MarkdownRender.vue';
 import { onMounted, ref } from 'vue';
 import type ArtPiece from '@/types/art';
@@ -35,73 +36,79 @@ onMounted(async () => {
       </a>
     </div>
     <div class="detailsSeparator"></div>
-    <div id="artPresentation">
-      <div id="artText">
-        <h2>Texto de presentación</h2>
-        <MarkdownRenderer :source="artPiece?.texto" :demote="2" />
-      </div>
-      <div id="presentationSeparator"></div>
-      <div id="artInfo">
-        <h2>Informaciones sobre la obra</h2>
-        <div id="artInfoGrid">
-          <div class="artInfoSection">
-            <Presentation />
-            <span class="pieceOfInfoTitle">Nombre</span>
-            <span class="pieceOfInfoData">{{ artPiece.nombre_cuadro }}</span>
-          </div>
-          <div class="artInfoSection">
-            <UserPen />
-            <span class="pieceOfInfoTitle">Artista</span>
-            <span class="pieceOfInfoData">{{ artPiece.nombre_artista }}</span>
-          </div>
-          <div class="artInfoSection">
-            <Calendar />
-            <span class="pieceOfInfoTitle">Año de creación</span>
-            <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
-          </div>
-          <div class="artInfoSection">
-            <Earth />
-            <span class="pieceOfInfoTitle">País de creación</span>
-            <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
-          </div>
-          <div class="artInfoSection">
-            <Brush />
-            <span class="pieceOfInfoTitle">Movimiento</span>
-            <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
-          </div>
-          <div class="artInfoSection">
-            <GraduationCap />
-            <span class="pieceOfInfoTitle">Estudiante</span>
-            <span class="pieceOfInfoData">{{ artPiece.estudiante }}</span>
-          </div>
-          <div class="artInfoSection">
-          </div>
+    <div id="artText">
+      <h2>Texto de presentación</h2>
+      <MarkdownRenderer :source="artPiece?.texto" :demote="2" />
+    </div>
+    <div class="detailsSeparator verticalSeparator"></div>
+    <div id="artInfo">
+      <h2>Informaciones sobre la obra</h2>
+      <div id="artInfoGrid">
+        <div class="artInfoSection">
+          <Presentation />
+          <span class="pieceOfInfoTitle">Nombre</span>
+          <span class="pieceOfInfoData">{{ artPiece.nombre_cuadro }}</span>
+        </div>
+        <div class="artInfoSection">
+          <UserPen />
+          <span class="pieceOfInfoTitle">Artista</span>
+          <span class="pieceOfInfoData">{{ artPiece.nombre_artista }}</span>
+        </div>
+        <div class="artInfoSection">
+          <Calendar />
+          <span class="pieceOfInfoTitle">Año de creación</span>
+          <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
+        </div>
+        <div class="artInfoSection">
+          <Earth />
+          <span class="pieceOfInfoTitle">País de creación</span>
+          <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
+        </div>
+        <div class="artInfoSection">
+          <Brush />
+          <span class="pieceOfInfoTitle">Movimiento</span>
+          <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
+        </div>
+        <div class="artInfoSection">
+          <GraduationCap />
+          <span class="pieceOfInfoTitle">Estudiante</span>
+          <span class="pieceOfInfoData">{{ artPiece.estudiante }}</span>
+        </div>
+        <div class="artInfoSection">
         </div>
       </div>
     </div>
     <div class="detailsSeparator"></div>
-    <iframe id="artAudio" src="https://drive.google.com/file/d/1WQaI4no5SUV2BXUHARfppoZ7gTWpgsBV/preview"></iframe>
+    <div id="audioWrapper">
+      <h2>Descripción audio</h2>
+      <iframe id="artAudio" src="https://drive.google.com/file/d/1WQaI4no5SUV2BXUHARfppoZ7gTWpgsBV/preview"></iframe>
+    </div>
   </div>
   <div id="loader-wrapper" v-if="!artPiece">
     <Loader />
   </div>
+  <BottomMention />
 </template>
 
 <style scoped>
 #details-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: minmax(0, 2fr) 2px minmax(0, 1fr);
   justify-content: center;
-  width: 100%;
+
+  width: 80%;
   padding: 5vh;
   box-sizing: border-box;
   gap: 5vh;
   overflow: hidden;
+  padding-bottom: 10vh;
 }
 
 #artHeadline {
   text-align: center;
+  grid-column: span 3;
 }
 
 #artHeadline h1 {
@@ -120,6 +127,8 @@ onMounted(async () => {
   justify-content: center;
   height: 75vh;
   width: 80vw;
+  grid-column: span 3;
+  place-self: center;
 }
 
 #imageWrapper.mobile {
@@ -145,17 +154,17 @@ onMounted(async () => {
 }
 
 .detailsSeparator {
-  width: 100%;
+  place-self: center;
+  width: 140%;
   height: 2px;
   background-color: rgb(104, 104, 104);
+  grid-column: span 3;
 }
 
-#artPresentation {
-  width: 80%;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) 2px 1fr;
-  gap: 4%;
+.verticalSeparator {
+  width: 2px;
+  height: 100%;
+  grid-column: unset;
 }
 
 #artText {
@@ -163,14 +172,8 @@ onMounted(async () => {
   box-sizing: content-box;
 }
 
-#artText h2, #artInfo h2 {
+#artText h2, #artInfo h2, #audioWrapper h2 {
   margin-top: 0;
-}
-
-#presentationSeparator {
-  width: 2px;
-  background-color: rgb(104, 104, 104);
-  /* margin: 20px 0; */
 }
 
 #artInfoGrid {
@@ -195,22 +198,37 @@ onMounted(async () => {
   text-decoration: underline;
 }
 
-#artAudio {
-  width: 200%;
-  height: 100px;
-  margin-top: 20px;
+#audioWrapper {
+  place-self: center;
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  width: 150%;
+}
+
+#audioWrapper h2 {
+  text-align: center;
+}
+
+#audioWrapper iframe {
   border: none;
+  height: 100px;
 }
 
 @media screen and (max-width: 970px) {
-  #artPresentation {
+  #details-wrapper {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 2px auto;
+    grid-template-rows: repeat(7, auto);
   }
 
-  #presentationSeparator {
-    width: 100%;
-    height: 2px;
+  #artInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #artInfo h2 {
+    align-self: baseline;
   }
 
   #artInfoGrid {
@@ -219,15 +237,39 @@ onMounted(async () => {
     margin-right: 40px;
   }
 
+  #artHeadline, #imageWrapper, .detailsSeparator, #artText, #artInfo, #audioWrapper {
+    grid-column: unset;
+  }
+
+  .verticalSeparator {
+    width: 140%;
+    height: 2px;
+  }
+
 }
 
+@media screen and (max-width: 600px) {
+  #details-wrapper {
+    width: 90%;
+    padding: 2vh;
+  }
 
+  #artInfoGrid {
+    grid-template-columns: 1fr;
+    margin-right: 0;
+  }
+
+  h2 {
+    text-align: center;
+  }
+  
+}
 
 #loader-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  height: 100svh;
+  height: calc(100vh - 8vh);
+  height: calc(100svh - 8svh);
 }
 </style>
