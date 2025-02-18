@@ -81,7 +81,7 @@ onMounted(async () => {
     <div class="detailsSeparator"></div>
     <div id="audioWrapper">
       <h2>Descripción audio</h2>
-      <iframe id="artAudio" src="https://drive.google.com/file/d/1WQaI4no5SUV2BXUHARfppoZ7gTWpgsBV/preview"></iframe>
+      <iframe id="artAudio" :src="artPiece.lace_grabacion"></iframe>
     </div>
   </div>
   <div id="loader-wrapper" v-if="!artPiece">
