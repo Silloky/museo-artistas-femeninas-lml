@@ -37,7 +37,7 @@ onMounted(async () => {
     </div>
     <div class="detailsSeparator"></div>
     <div id="artText">
-      <h2>Texto de presentación</h2>
+      <h2>Presentación escrita</h2>
       <MarkdownRenderer :source="artPiece?.texto" :demote="2" />
     </div>
     <div class="detailsSeparator verticalSeparator"></div>
@@ -80,7 +80,7 @@ onMounted(async () => {
     </div>
     <div class="detailsSeparator"></div>
     <div id="audioWrapper">
-      <h2>Descripción audio</h2>
+      <h2>Presentación oral</h2>
       <iframe id="artAudio" :src="artPiece.lace_grabacion"></iframe>
     </div>
   </div>
