@@ -22,7 +22,7 @@ onMounted(async () => {
 });
 
 function dimensionsTransform(dimensions: string) {
-  var betterDimensions = dimensions.replace(/(\d*) (\d*)/gm, '$1 × $2 cm');
+  var betterDimensions = dimensions.replace(/(\d*)[x\s](\d*)/gm, '$1 × $2 cm');
   console.log(betterDimensions);
   return betterDimensions
 }
