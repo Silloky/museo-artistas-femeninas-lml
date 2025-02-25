@@ -8,7 +8,7 @@ import { onMounted, ref } from 'vue';
 import type ArtPiece from '@/types/art';
 import { isMobile } from 'mobile-device-detect';
 
-import { Presentation, UserPen, Calendar, Earth, Brush, GraduationCap } from 'lucide-vue-next';
+import { Presentation, UserPen, Calendar, MapPinned, Brush, GraduationCap, Ruler, Wrench } from 'lucide-vue-next';
 
 const artID = router.currentRoute.value.params.id as string;
 var artPiece = ref(undefined as ArtPiece | undefined)
@@ -20,6 +20,12 @@ onMounted(async () => {
     return piece
   });
 });
+
+function dimensionsTransform(dimensions: string) {
+  var betterDimensions = dimensions.replace(/(\d*) (\d*)/gm, '$1 × $2 cm');
+  console.log(betterDimensions);
+  return betterDimensions
+}
 
 </script>
 
@@ -60,14 +66,24 @@ onMounted(async () => {
           <span class="pieceOfInfoData">{{ artPiece.ano_creacion }}</span>
         </div>
         <div class="artInfoSection">
-          <Earth />
-          <span class="pieceOfInfoTitle">País de creación</span>
-          <span class="pieceOfInfoData">{{ artPiece.pais_creacion }}</span>
-        </div>
-        <div class="artInfoSection">
           <Brush />
           <span class="pieceOfInfoTitle">Movimiento</span>
           <span class="pieceOfInfoData">{{ artPiece.movimiento }}</span>
+        </div>
+        <div class="artInfoSection">
+          <Wrench />
+          <span class="pieceOfInfoTitle">Técnica</span>
+          <span class="pieceOfInfoData">{{ artPiece.tecnica }}</span>
+        </div>
+        <div class="artInfoSection">
+          <Ruler />
+          <span class="pieceOfInfoTitle">Dimensiones</span>
+          <span class="pieceOfInfoData">{{ dimensionsTransform(artPiece.dimensiones) }}</span>
+        </div>
+        <div class="artInfoSection">
+          <MapPinned />
+          <span class="pieceOfInfoTitle">Lugar de exposición</span>
+          <span class="pieceOfInfoData">{{ artPiece.lugar_exposicion }}</span>
         </div>
         <div class="artInfoSection">
           <GraduationCap />
