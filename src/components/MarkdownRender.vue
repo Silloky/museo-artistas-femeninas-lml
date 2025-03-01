@@ -4,7 +4,9 @@
 
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
+import markdownItUnderline from 'markdown-it-underline';
 const markdown = new MarkdownIt()
+markdown.use(markdownItUnderline)
 
 function demoteMdHeaders(md: string, demote: number): string {
     if (demote <= 0) return md;
