@@ -23,8 +23,9 @@ useArtStore().fetchArtPieces().then((artStore) => {
 <template>
   <div id="landing-wrapper" :class="{ 'restrictHeight': !galleryLoaded }">
     <div id="title-section">
-      <h1>El Museo Virtual de Artistas Feministas Hispanas</h1>
-      <h2>La Merci Littoral</h2>
+      <h1>Femenin'arte</h1>
+      <h1 id="subtitle">El Poder del Arte hecho por Mujeres</h1>
+      <h2 id="lml">La Merci Littoral</h2>
     </div>
     <div id="gallery" :class="{ 'hidden': !galleryLoaded }">
       <RouterLink :to="{name: 'details', params: {id: item.id}}" v-for="(item, index) in artPieces">
@@ -65,11 +66,17 @@ useArtStore().fetchArtPieces().then((artStore) => {
 }
 
 h1 {
-  font-size: 3rem;
+  margin-top: 0;
+  font-size: 4rem;
   margin-bottom: 0;
 }
 
-h2 {
+h1#subtitle {
+  margin-top: 0;
+  font-size: 2.2rem;
+}
+
+h2#lml {
   font-size: 2rem;
   background: rgb(128, 198, 214);
   background: linear-gradient(95deg, rgba(128, 198, 214, 1) 0%, rgba(16, 152, 218, 1) 100%);
