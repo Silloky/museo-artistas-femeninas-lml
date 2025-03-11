@@ -80,6 +80,7 @@ h2#lml {
   font-size: 2rem;
   background: rgb(128, 198, 214);
   background: linear-gradient(95deg, rgba(128, 198, 214, 1) 0%, rgba(16, 152, 218, 1) 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
